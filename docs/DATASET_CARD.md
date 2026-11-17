@@ -11,16 +11,16 @@ license_name: to-be-confirmed-by-the-team
 
 # Dataset card: Arabic PII de-identification
 
-Two separate things are described here: the **training set** used to fine-tune the extractor, and the **golden test** used to evaluate it. They are built from different material and are kept apart by an automatic check.
+This card describes two distinct components: the **planned training corpus** for fine-tuning and the **approved, frozen Golden Test** for evaluation. All future training/dev data will be screened against the frozen test before training.
 
 ## Golden test
 
-- File: `data/golden_test.jsonl`, TBD rows (target: about 100).
+- File: `data/golden_test.jsonl`, **100 unique, approved and frozen rows**.
 - Written by the team following `docs/annotation_guidelines.md`: synthetic clinical and administrative sentences in Modern Standard Arabic and Saudi dialect. Every person, number and address is invented.
-- Each row was written by one member and checked by another (`written_by`, `checked_by`). Rows changed during review: TBD of TBD.
-- Fixed before training: commit TBD on TBD, SHA-256 TBD.
+- Each of the four members authored and annotated 25 rows and reviewed 25 rows written by another member; authors and checkers differ on all rows. One entity annotation was corrected in `g090` before approval.
+- Frozen before planned model training on **17 November 2026**: [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e), SHA-256 `9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459`.
 - Row format: `{"id", "text", "entities": [{"text", "type"}], "dialect", "category", "written_by", "checked_by"}`.
-- Entity types: `PERS`, `LOC`, `ORG`, `DATE`, `NATIONAL_ID`, `PHONE`, `MRN`, `EMAIL`. Counts per type and the share of rows without entities: TBD (printed by `python -m src.validate_golden`).
+- Entity counts: `PERS` 19, `LOC` 15, `ORG` 18, `DATE` 14, `NATIONAL_ID` 13, `PHONE` 15, `MRN` 13, `EMAIL` 14 (**121 spans**); **20** rows contain no entity and **35** are Saudi dialect.
 
 ## Training set
 

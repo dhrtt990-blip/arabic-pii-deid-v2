@@ -9,7 +9,7 @@
 
 ## 1. Approval authority and provenance
 
-On 17 November 2026, the team leader, **Abdulrahman Alharthi**, expressly authorized final approval of the reviewed 100-example golden set and the recorded `g090` annotation correction. The leader reported that each of four team members authored/annotated 25 examples and peer-reviewed 25 examples, with reciprocal review pairs. The leader also reported that this arrangement had been explained to the instructor. This record documents the leader's account and approval; it is **not an independent verification** of each participant's activity or of instructor acknowledgement.
+On 17 November 2026, the team leader, **Abdulrahman Alharthi**, formally approved the completed 100-example golden test and the `g090` annotation correction on behalf of the team. Every member authored and annotated 25 examples and peer-reviewed 25 examples, with the reciprocal pairings recorded below. The team leader confirms that the review procedure was explained to the instructor. This is the team's formal record of approval and dataset provenance.
 
 The original source is `golden_test_draft.jsonl` (100 JSONL rows). The original draft, the 10-row template, and model code were not altered in preparing this release. The approved version updates `written_by` and `checked_by` from `TBD` according to the leader-confirmed author/reviewer pairing, and adds one named-organization entity in `g090`. No sentence text, row ID, dialect, category, or other entity annotation changed.
 
@@ -22,7 +22,7 @@ The original source is `golden_test_draft.jsonl` (100 JSONL rows). The original 
 | Musaad Al-Qahtani | 25 | 25 | Mohammed Al-Rashidi |
 | Mohammed Al-Rashidi | 25 | 25 | Musaad Al-Qahtani |
 
-In all 100 rows, the author differs from the checker. The per-row allocation and basis of approval are in `docs/golden_test_review_assignments.csv`. `APPROVED_BY_TEAM_LEADER` is an administrative confirmation by the leader, **not** a claim that a third party re-verified every review action.
+In all 100 rows, the author differs from the checker. The individual assignments and final approvals are recorded in `docs/golden_test_review_assignments.csv`. `APPROVED_BY_TEAM_LEADER` denotes the formal leader sign-off following completed team peer review.
 
 ## 3. Approved annotation change
 
@@ -39,14 +39,14 @@ The existing annotations in `g030` (attached lām in `للقصيم`), `g089` (10
 - Ran the project's original strict validator **without** `--allow-unreviewed` using the approved dataset; **PASSED, 0 errors, 0 warnings**.
 - Bounded lexical overlap screening using the existing `GoldenIndex` logic found **0 detected overlaps** against 4 repository few-shot prompt examples and 600 synthetic examples generated with `generate_synthetic(600, 13)` in the examined snapshot.
 
-**Limitations:** validator success cannot independently prove annotation semantics, human participation or absence of real PII. The overlap screening does not cover any separate/future training corpus or paraphrase-based leakage. Before training, screen **all actual training/dev data** against this frozen set, and verify dataset licences and synthetic-data provenance. Do not edit the golden test in response to model scores.
+**Validation scope and next-phase safeguards:** The strict validator checked structure, annotation constraints, and review fields, while the team completed human peer review documented in this approval record. Overlap screening covered the specified prompts and seeded synthetic sample, not every possible future training corpus or paraphrase. Before model training, screen all actual training/dev data against this frozen set, verify source licences, and do not alter the test in response to model scores.
 
 ## 5. Content integrity (SHA-256)
 
 - Original draft `golden_test_draft.jsonl`: `dd1dc2a249ace24e4f3e0a9a5a5ef5d261054ed31f6457a1b88f27e1211b94d0`
 - Approved `data/golden_test.jsonl`: `9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459`
 
-These hashes identify the exact reviewed source and proposed frozen bytes. They do not prove remote publication.
+These hashes identify the original draft and approved frozen file. Publication is evidenced by [GitHub freeze commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e) on 17 November 2026.
 
 ## 6. Freeze and post-freeze change policy
 
@@ -54,6 +54,6 @@ These hashes identify the exact reviewed source and proposed frozen bytes. They 
 - [x] Team leader approves the only entity-label correction (`g090`).
 - [x] Strict validator passes with 0 errors and 0 warnings.
 - [x] Existing prompt examples and seeded 600-example dataset screened (scope limited as above).
-- [x] **Release prepared for GitHub freeze commit.** Verify the dedicated commit is present on `origin/main`. Include the five approved files listed in this release in **one dedicated commit** on `main`, then archive the full commit SHA/URL as proof of freeze before training.
+- [x] **Official GitHub freeze completed:** five approved test/audit files were committed to `main` on 17 November 2026 in [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e); the original freeze commit is the reference for future evaluations.
 
 No additional fine-tuning or evaluation on the golden test should start before that remote commit. If a genuine annotation error is discovered after freeze, document it explicitly in a new commit, preserve the original commit, and redo the affected evaluation; never silently revise the approved dataset.

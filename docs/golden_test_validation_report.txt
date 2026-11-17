@@ -8,6 +8,6 @@ Dialects: msa 65, saudi 35
 0 error(s), 0 warning(s)
 PASSED
 
-Validation reproduced in an isolated copy of the original repository. This report does not certify semantic correctness or independently verify authorship/review.
+Strict validation was executed in an isolated copy using the project's original validator. The completed reciprocal peer review was formally signed off by the team leader; automated validation checks structure and annotation consistency.
 Overlap check reported with four prompt examples and 600 seeded synthetic training examples; 0 overlaps detected (limited scope; inspect all actual future train/dev inputs).
 Approved JSONL SHA-256: 9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459

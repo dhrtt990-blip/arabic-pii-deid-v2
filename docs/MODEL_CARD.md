@@ -24,7 +24,7 @@ A LoRA adapter that makes `Qwen/Qwen3-1.7B` read an Arabic sentence and return t
 
 Types: `PERS` (person name or kunya), `LOC` (city, district, street, country), `ORG` (named institution), `DATE` (a specific date in words or digits).
 
-The adapter is one part of a de-identification pipeline. National IDs, phone numbers, medical record numbers and e-mail addresses are handled by regex tools, not by this model, and a leakage checker decides whether the redacted text may be released. Code: TBD (link to the team's GitHub repository).
+The adapter is one part of a de-identification pipeline. National IDs, phone numbers, medical record numbers and e-mail addresses are handled by regex tools, not by this model, and a leakage checker decides whether the redacted text may be released. Code: https://github.com/dhrtt990-blip/arabic-pii-deid-v2.
 
 ## Intended use
 
@@ -90,7 +90,7 @@ Update this table if the team changes any setting in the notebook.
 
 ## Evaluation
 
-Test set: the team's golden test, TBD examples, written and double-checked by the team and committed before training (commit TBD, SHA-256 TBD). A predicted entity counts only if its boundaries and its type both match. Leakage is the share of gold entities not fully masked in released text.
+Test set: the team's **100-example peer-reviewed Golden Test**, approved and frozen on **17 November 2026** in [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e), SHA-256 `9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459`. Entity matches require exact boundaries and type. Leakage is the share of gold entities not fully masked in released text.
 
 | System | Precision | Recall | F1 | Leakage rate | Invalid JSON |
 |---|---|---|---|---|---|

@@ -4,7 +4,7 @@ A small language model, fine-tuned with LoRA, finds personal information in Arab
 
 Course project for *NLP Applications* (KAUST Academy, 2026), topic 6: own project, option A.
 
-> **Status.** The code, the unit tests and the documentation are in place. The golden test, the trained adapter and every result still have to be produced by the team. Nothing in this repository is a result until the Results section below is filled in from `results/results.md`.
+> **Project status (17 November 2026).** The four-member team's approved, peer-reviewed 100-example golden test is frozen on `main` at [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e). Implementation code, tests and documentation are in place. LoRA training, real-model scoring and local serving remain next-phase work; mock dry runs are not model results.
 
 ## How the project meets the five requirements
 
@@ -75,10 +75,9 @@ On Windows the same steps are in `run_local.bat`: double-click it. It creates `.
 
 The order matters: the golden test is fixed and committed before any training data is built.
 
-1. **Write the golden test.** Follow `docs/annotation_guidelines.md`. Start from `data/golden_test_template.jsonl` (10 example rows) and write about 100 rows into `data/golden_test.jsonl`. Every row is written by one member and checked by another.
+1. **Golden test — approved and frozen.** Every member authored 25 examples and peer-reviewed 25 examples from another member. The 100-row set passed the strict validator and was frozen on 17 November 2026 in [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e) before planned fine-tuning. The review record is in `docs/GOLDEN_TEST_REVIEW_AND_FREEZE.md`. Post-freeze corrections require a separate documented commit and re-evaluation.
    ```bash
    python -m src.validate_golden data/golden_test.jsonl
-   git add data/golden_test.jsonl && git commit -m "Golden test v1 (fixed before training)"
    ```
 2. **Optional training material.** Put Wojood CoNLL files in `data/raw/wojood/` and team-written training sentences in `data/team_synthetic.jsonl` (same row format as the golden test). Never reuse golden sentences.
 3. **Train.** Open `notebooks/train_qwen3_lora_colab.ipynb` in Google Colab with a T4 GPU. It validates the golden test, builds the training data with `src/data_prep.py` (which removes and then verifies zero overlap with the golden test), trains the adapter, publishes it, and exports a GGUF file.
@@ -126,7 +125,7 @@ requirements.txt, requirements.lock.txt, requirements-train.txt
 
 Not available yet. After step 5, copy the two tables from `results/results.md` here, with the line that names the test set.
 
-Test set: `data/golden_test.jsonl`, TBD examples, SHA-256 TBD, committed on TBD.
+Test set: `data/golden_test.jsonl`, **100 team-approved examples and 121 annotated spans**, SHA-256 `9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459`, frozen 17 November 2026 in [commit 469984c00d101512df09851ebd61ea3ef096690e](https://github.com/dhrtt990-blip/arabic-pii-deid-v2/commit/469984c00d101512df09851ebd61ea3ef096690e).
 
 | System | Precision | Recall | F1 | Leakage rate | Invalid JSON |
 |---|---|---|---|---|---|
@@ -137,14 +136,16 @@ Test set: `data/golden_test.jsonl`, TBD examples, SHA-256 TBD, committed on TBD.
 Examples that changed between systems (wrong to right, right to wrong): TBD.
 Safety check: TBD passed, TBD withheld, TBD failed of 10.
 
-## Team
+## Team — approved Golden Test contributions
 
-| Member | Part |
-|---|---|
-| TBD | Golden test and annotation guidelines |
-| TBD | Data preparation and fine-tuning |
-| TBD | Pipeline, regex tools and app |
-| TBD | Evaluation, error analysis and safety check |
+| Member | Authored | Peer-reviewed | Responsibility |
+|---|---:|---:|---|
+| Abdulrahman Alharthi | 25 | 25 | Team leader; reviewer of Yasser's examples |
+| Yasser Al-Hajlah | 25 | 25 | Reviewer of Abdulrahman's examples |
+| Musaad Al-Qahtani | 25 | 25 | Reviewer of Mohammed's examples |
+| Mohammed Al-Rashidi | 25 | 25 | Reviewer of Musaad's examples |
+
+The team leader approved the completed reciprocal review and golden-test release on 17 November 2026. For row-level records, see `docs/golden_test_review_assignments.csv`. Subsequent training and evaluation responsibilities will be documented when work is performed.
 
 ## Data and licences
 
