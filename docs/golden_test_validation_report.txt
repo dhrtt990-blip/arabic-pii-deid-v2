@@ -1,0 +1,13 @@
+Golden Test -- strict validation report (release v1.0)
+Approval: Abdulrahman Alharthi (team leader), 2026-11-17
+Source: 100-row reviewed golden set
+Command: python -m src.validate_golden data/golden_test.jsonl
+Rows: 100 (without entities: 20)
+Entities: 121 (PERS 19, LOC 15, ORG 18, DATE 14, NATIONAL_ID 13, PHONE 15, MRN 13, EMAIL 14)
+Dialects: msa 65, saudi 35
+0 error(s), 0 warning(s)
+PASSED
+
+Validation reproduced in an isolated copy of the original repository. This report does not certify semantic correctness or independently verify authorship/review.
+Overlap check reported with four prompt examples and 600 seeded synthetic training examples; 0 overlaps detected (limited scope; inspect all actual future train/dev inputs).
+Approved JSONL SHA-256: 9297f0d21c44ad7f7711af3c254a1e5ff9da1cf863e93162386151993d590459
