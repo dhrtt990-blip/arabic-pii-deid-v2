@@ -138,7 +138,7 @@ class TestEvaluateCli:
 
     def test_invalid_golden_is_refused(self, tmp_path):
         golden = tmp_path / "golden.jsonl"
-        write_jsonl(golden, [{**g, "checked_by": "TBD"} for g in GOLDEN])
+        write_jsonl(golden, [{**g, "checked_by": ""} for g in GOLDEN])
         assert eval_main(["--golden", str(golden), "--client", "mock", "--min-rows", "0", "--out", str(tmp_path / "o")]) == 1
         assert eval_main(["--golden", str(tmp_path / "absent.jsonl"), "--client", "mock"]) == 1
 

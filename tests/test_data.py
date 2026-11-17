@@ -239,7 +239,7 @@ class TestPrepare:
             prepare(args)
 
     def test_unreviewed_golden_is_refused_by_default(self, tmp_path):
-        rows = [{**g, "checked_by": "TBD"} for g in GOLDEN]
+        rows = [{**g, "checked_by": ""} for g in GOLDEN]
         with pytest.raises(SystemExit):
             prepare(_args(tmp_path, rows))
         prepare(_args(tmp_path, rows, extra=["--allow-unreviewed"]))
@@ -267,7 +267,7 @@ class TestValidateGolden:
         ({"entities": [{"text": "غير موجود", "type": "PERS"}]}, "not found"),
         ({"entities": [{"text": " سلطان", "type": "PERS"}]}, "leading or trailing"),
         ({"entities": "none"}, "must be a list"),
-        ({"checked_by": "TBD"}, "must name"),
+        ({"checked_by": ""}, "must name"),
         ({"checked_by": "A", "written_by": "A"}, "other than its writer"),
         ({"text": GOLDEN[0]["text"]}, "same text"),
     ])

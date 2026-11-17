@@ -36,7 +36,7 @@ The adapter is one part of a de-identification pipeline. National IDs, phone num
 - It is not a certified de-identification tool and has not been validated on real patient records. Do not rely on it to release real data.
 - Languages other than Arabic, and names written in Latin script, were not a training target.
 
-## How to use
+## How to use (after the adapter has been trained and published)
 
 ```python
 import json
@@ -44,7 +44,7 @@ import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-BASE, ADAPTER = "Qwen/Qwen3-1.7B", "TBD/this-repository-id"
+BASE, ADAPTER = "Qwen/Qwen3-1.7B", "owner/replace-with-trained-adapter-id"
 tok = AutoTokenizer.from_pretrained(BASE)
 model = PeftModel.from_pretrained(AutoModelForCausalLM.from_pretrained(BASE, dtype=torch.float16), ADAPTER)
 
@@ -68,9 +68,9 @@ Chat-format rows built by `src/data_prep.py`: one system prompt, the sentence as
 - seeded template sentences in a clinical and administrative register, with invented names;
 - sentences written by the team.
 
-Rows: TBD train / TBD validation (from `data/processed/prep_report.json`).
+Rows: training and validation data have not yet been prepared; final counts will come from `data/processed/prep_report.json` after preparation.
 
-No golden-test sentence is in the training data: every training sentence that equalled, nearly equalled or contained a golden sentence was removed and the absence of overlap was verified again before training. The report records the SHA-256 of the golden file used.
+The frozen Golden Test must remain excluded from training. Before fine-tuning, `src/data_prep.py` will filter exact and near-duplicate overlaps and verify the resulting training set. The preparation report will record the golden-file SHA-256.
 
 ## Training procedure
 
@@ -83,7 +83,7 @@ No golden-test sentence is in the training data: every training sentence that eq
 | Batch size | 4, gradient accumulation 4 |
 | Max length | 768 tokens |
 | Seed | 13 |
-| Hardware | TBD (for example one T4 GPU on Google Colab) |
+| Hardware | Not yet selected; a Google Colab T4 is a candidate |
 | Library versions | `requirements-train.lock.txt` in the project repository |
 
 Update this table if the team changes any setting in the notebook.
@@ -94,21 +94,21 @@ Test set: the team's **100-example peer-reviewed Golden Test**, approved and fro
 
 | System | Precision | Recall | F1 | Leakage rate | Invalid JSON |
 |---|---|---|---|---|---|
-| Untuned Qwen3-1.7B with the full prompt and worked examples | TBD | TBD | TBD | TBD | TBD |
-| This adapter, model only | TBD | TBD | TBD | TBD | TBD |
-| This adapter inside the full pipeline | TBD | TBD | TBD | TBD | TBD |
+| Untuned Qwen3-1.7B with the full prompt and worked examples | — | — | — | — | — |
+| This adapter, model only | — | — | — | — | — |
+| This adapter inside the full pipeline | — | — | — | — | — |
 
-Examples that changed from wrong to right and from right to wrong between the untuned and the tuned model: TBD and TBD.
+Wrong-to-right and right-to-wrong changes between models: not yet evaluated.
 
-Results are pending. Replace every TBD with the numbers from `results/results.md` and upload this card again.
+Real-model evaluation has not been run. The dashes above indicate unmeasured results, not zero performance. Update this card with verified values from `results/results.md` after evaluation.
 
 ## Limitations
 
 - Most training text is news, while the intended input is clinical and administrative. Performance on real clinical notes is unknown.
 - Dates written entirely in words and relative dates are weakly covered by the training sources.
 - The model can copy an entity with slightly different characters; such strings are not found in the text and are ignored by the pipeline, which lowers recall.
-- Safety check on 10 adversarial inputs: TBD passed, TBD withheld, TBD failed (`results/safety_report.md`).
+- Real-model safety check on 10 adversarial inputs has not yet been conducted; results will be recorded in `results/safety_report.md`.
 
 ## Licence
 
-TBD. The base model is released by its authors under Apache 2.0. Before choosing a licence for this adapter, check the licences of the training sources listed in the dataset card.
+The adapter's release licence has not yet been selected. The base model is described as Apache 2.0 by its authors; source-data licences must be checked before assigning an adapter licence.

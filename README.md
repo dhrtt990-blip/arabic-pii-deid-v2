@@ -129,12 +129,14 @@ Test set: `data/golden_test.jsonl`, **100 team-approved examples and 121 annotat
 
 | System | Precision | Recall | F1 | Leakage rate | Invalid JSON |
 |---|---|---|---|---|---|
-| 1. Untuned Qwen3-1.7B + prompt | TBD | TBD | TBD | TBD | TBD |
-| 2. Tuned model only | TBD | TBD | TBD | TBD | TBD |
-| 3. Full system | TBD | TBD | TBD | TBD | TBD |
+| 1. Untuned Qwen3-1.7B + prompt | — | — | — | — | — |
+| 2. Tuned model only | — | — | — | — | — |
+| 3. Full system | — | — | — | — | — |
 
-Examples that changed between systems (wrong to right, right to wrong): TBD.
-Safety check: TBD passed, TBD withheld, TBD failed of 10.
+*Dashes indicate no real-model evaluation has been performed; they are not zero scores.*
+
+Examples that changed between systems: not evaluated yet (no trained adapter or real-model comparison available).
+Real-model safety check: not yet run; mock-only dry runs are documented separately and must not be reported as model results.
 
 ## Team — approved Golden Test contributions
 
@@ -145,7 +147,7 @@ Safety check: TBD passed, TBD withheld, TBD failed of 10.
 | Musaad Al-Qahtani | 25 | 25 | Reviewer of Mohammed's examples |
 | Mohammed Al-Rashidi | 25 | 25 | Reviewer of Musaad's examples |
 
-The team leader approved the completed reciprocal review and golden-test release on 17 November 2026. For row-level records, see `docs/golden_test_review_assignments.csv`. Subsequent training and evaluation responsibilities will be documented when work is performed.
+Each of the four members directly completed the assigned 25 peer reviews in person, witnessed by team leader Abdulrahman Alharthi, and the team's Golden Test was frozen on 17 November 2026. See `docs/golden_test_review_assignments.csv` for all 100 assignments. Training and evaluation roles will be recorded when those phases occur.
 
 ## Data and licences
 
