@@ -1,6 +1,6 @@
 # Arabic PII De-identification
 
-A small language model, fine-tuned with LoRA, finds personal information in Arabic clinical and administrative text. It works inside a pipeline with deterministic regex tools and a leakage checker, and runs locally in a Streamlit app with right-to-left display.
+The proposed system adapts Qwen3-1.7B with LoRA to extract personal information from Arabic clinical and administrative text. The model is designed to operate within a pipeline combining deterministic regex detection, masking, leakage checks, and a local right-to-left Streamlit interface.
 
 Course project for *NLP Applications* (KAUST Academy, 2026), topic 6: own project, option A.
 
@@ -10,11 +10,11 @@ Course project for *NLP Applications* (KAUST Academy, 2026), topic 6: own projec
 
 | Requirement | Where |
 |---|---|
-| Fine-tuning with LoRA or QLoRA | `notebooks/train_qwen3_lora_colab.ipynb` trains an adapter on `Qwen/Qwen3-1.7B` and publishes it on the Hugging Face Hub with `docs/MODEL_CARD.md` |
+| Fine-tuning with LoRA or QLoRA | `notebooks/train_qwen3_lora_colab.ipynb` contains the proposed LoRA training and Hugging Face publication workflow for `Qwen/Qwen3-1.7B`; training and publication have not yet been executed |
 | Evaluation before, after, and for the full system | `src/evaluate.py` scores the untuned model with a full prompt, the tuned model alone, and the tuned model inside the pipeline, all on the same golden test |
 | The model works inside a pipeline | `src/pipeline.py`: LLM extractor, regex tools, merger and redactor, leakage checker with a fallback |
 | At most 4B parameters | Qwen3-1.7B |
-| Local deployment | The tuned model is served by Ollama on the team's machine; `app/streamlit_app.py` is the demo |
+| Local deployment | The planned tuned model will be served locally if Ollama compatibility tests pass; `app/streamlit_app.py` provides the demo interface |
 
 ## Architecture
 
@@ -176,4 +176,4 @@ Not verified: calls against a real Ollama server; the Colab notebook (no GPU was
 
 Data: ANERCorp (Benajiba et al., 2007; CAMeL Lab split) and Wojood (Jarrar et al., 2022). Base model: Qwen3-1.7B.
 
-The code scaffold in this repository was drafted with an AI assistant (Claude) and reviewed by the team. TBD: describe the extent of AI assistance as the course policy requires.
+The initial code scaffold was drafted with AI assistance (Claude) and reviewed by the team. This disclosure is maintained transparently; the team will document the full extent of permitted AI assistance in the final course submission.

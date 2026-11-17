@@ -24,7 +24,7 @@ This card describes two distinct components: the **planned training corpus** for
 
 ## Training set
 
-Built by `src/data_prep.py`. Every row is a chat example: the system prompt, the sentence, and the answer as JSON with the `PERS`, `LOC`, `ORG` and `DATE` entities. Identifiers (ID, phone, MRN, e-mail) are not training targets; the regex tools handle them.
+To be built by `src/data_prep.py` before fine-tuning. Every resulting row will be a chat example: the system prompt, the sentence, and the answer as JSON with the `PERS`, `LOC`, `ORG` and `DATE` entities. Identifiers (ID, phone, MRN, e-mail) are not training targets; the regex tools handle them.
 
 | Source | What it is | How it is used | Licence | Rows |
 |---|---|---|---|---|

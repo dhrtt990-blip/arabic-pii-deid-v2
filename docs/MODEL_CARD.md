@@ -16,7 +16,7 @@ tags:
 
 # Arabic PII extractor: LoRA adapter for Qwen3-1.7B
 
-A LoRA adapter that makes `Qwen/Qwen3-1.7B` read an Arabic sentence and return the personal information in it as JSON:
+**Model card draft for a planned LoRA adapter; training, validation and publication are not yet complete.** The intended adapter will make `Qwen/Qwen3-1.7B` read an Arabic sentence and return personal-information spans as JSON:
 
 ```json
 {"entities": [{"text": "سلطان الدوسري", "type": "PERS"}, {"text": "مستشفى النخيل", "type": "ORG"}]}
